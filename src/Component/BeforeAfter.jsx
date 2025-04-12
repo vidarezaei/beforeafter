@@ -11,11 +11,11 @@ function handleBorderValue(e){
 };
 return(
     <div className="container">
-        <div className="beforeImgcs" >
-            <img src={beforeimg} alt="beforeimg" style={{width: `${borderValue}%`,overflow:"hidden"}} />
+        <div className="beforeImgcs" style={{width: `${borderValue}%`,overflow:"hidden",zIndex:3333 }}>
+            <img src={beforeimg} alt="beforeimg" />
         </div>
 
-        <div className="beforeImgcs" >
+        <div className="afterImgcs" >
             <img src={afterimg} alt="afterimg" />
         </div>
 
