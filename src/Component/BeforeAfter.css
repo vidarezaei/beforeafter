@@ -1,35 +1,61 @@
-.container{
+.container,
+.container * {
+  user-select: none;
+}
+.beforeImgcs ,
+.afterImgcs  {
+  user-drag: none;
+  user-select: none;
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
+}
+.container {
     position: relative;
     width: 500px;
     height: 701px;
     overflow: hidden;
-}
-.beforeImgcs,.afterImgcs{
-position: absolute;
-top: 0;
-left:0;
-height: 100%;
-overflow: hidden;
-display: block;
-}
-.bordervalue{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translateX(-50%) translateY(-50%);
-    z-index: 9999;
-    width: 100%;
-    appearance: none;
-    height: 10px;
-    background: transparent;
-    border-radius: 5px;
-}
-
-.bordervalue::-webkit-slider-thumb,.bordervalue::-moz-slider-thumb{
-    appearance: none;
-    width: 20px;
-    height:100%;
-    background: red;
     cursor: pointer;
+  }
+  
+  .beforeImgcs,
+  .afterImgcs {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+  }
+  
 
-}
+  .beforeImgcs{
+    z-index: 2;
+  }
+  .afterImgcs{
+z-index: 1;
+  }
+  .border {
+    position: absolute;
+    top: 0;
+    width: 2px;
+    height: 100%;
+    background: white;
+    cursor: ew-resize;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .borderBubble {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    background-color: #ffffff;
+    border: 2px solid #000;
+    border-radius: 50%;
+    top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  }
+  
