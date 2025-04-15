@@ -1,28 +1,61 @@
-import  {useState}  from "react";
-import "./BeforeAfter.css"
+import React, { useState, useRef, useEffect } from "react";
+import "./BeforeAfter.css";
 
+function BeforeAfter({ beforeimg, afterimg }) {
+  const [borderValue, setBorderValue] = useState(50);
+  const [draggingState, setDraggingState] = useState(false);
+  const containerRef = useRef(null);
 
-function BeforeAfter({beforeimg , afterimg}){
-const [borderValue, setBorderValue]=useState(50);
+  function updateBorderValue(e) {
+    const containerWidth = containerRef.current.offsetWidth;
+    const containerLeft = containerRef.current.getBoundingClientRect().left;
 
+    const newValue = Math.min(
+      Math.max(((e.clientX - containerLeft) / containerWidth) * 100, 0),
+      100
+    );
+    setBorderValue(newValue);
+  }
 
-function handleBorderValue(e){
-    setBorderValue(e.target.value);
-};
-return(
-    <div className="container">
-        <div className="beforeImgcs" style={{width: `${borderValue}%`,overflow:"hidden",zIndex:3333 }}>
-            <img src={beforeimg} alt="beforeimg" />
-        </div>
+  function draggingStart(e) {
+    setDraggingState(true);
+    updateBorderValue(e);
+  }
 
-        <div className="afterImgcs" >
-            <img src={afterimg} alt="afterimg" />
-        </div>
+  function draggingStop() {
+    setDraggingState(false);
+  }
 
-        <input type="range" min="0" max="100" value={borderValue} onChange={handleBorderValue} className="bordervalue" />
+  useEffect(() => {
+    if (draggingState) {
+      window.addEventListener("mousemove", updateBorderValue);
+      window.addEventListener("mouseup", draggingStop);
+    } else {
+      window.removeEventListener("mousemove", updateBorderValue);
+      window.removeEventListener("mouseup", draggingStop);
+    }
+
+    return () => {
+      window.removeEventListener("mousemove", updateBorderValue);
+      window.removeEventListener("mouseup", draggingStop);
+    };
+  }, [draggingState]);
+
+  return (
+    <div className="container" ref={containerRef}>
+      <div className="beforeImgcs" style={{ width: `${borderValue}%` }}>
+        <img src={beforeimg} alt="beforeimg" />
+      </div>
+
+      <div className="afterImgcs">
+        <img src={afterimg} alt="afterimg" />
+      </div>
+
+      <div className="border" style={{ left: `${borderValue}%` }} onMouseDown={draggingStart}>
+        <div className="borderBubble" />
+      </div>
     </div>
-)
-
+  );
 }
 
 export default BeforeAfter;
