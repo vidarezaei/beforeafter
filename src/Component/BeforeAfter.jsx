@@ -43,7 +43,7 @@ function BeforeAfter({ beforeimg, afterimg }) {
 
   return (
     <div className="container" ref={containerRef}>
-      <div className="beforeImgcs" style={{ width: `${borderValue}%` }}>
+      <div className="beforeImgcs" style={{ clipPath: `polygon(0 0 ,  ${borderValue}%  0 , ${borderValue}%  100% , 0 100% )`}}>
         <img src={beforeimg} alt="beforeimg" />
       </div>
 
