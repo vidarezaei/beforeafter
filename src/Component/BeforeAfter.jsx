@@ -1,44 +1,23 @@
 import React, { useState, useRef, useEffect } from "react";
 import "./BeforeAfter.css";
+import updateBorderValue from "./functions/UpdateBorderValue";
 
 function BeforeAfter({ beforeimg, afterimg }) {
   const [borderValue, setBorderValue] = useState(50);
-  const [draggingState, setDraggingState] = useState(false);
- 
-
-
-  function updateBorderValue(e) {
-    const target = document.querySelector(".container");
-    const rect = target.getBoundingClientRect();
-
-  const newValue =Math.min(
-    Math.max(((e.clientX - rect.left) / rect.width) * 100, 0),
-    100
-  );
-
-  setBorderValue(newValue);
-    
-  }
-
-
-  
+  let moveHandler = null;
 
   function draggingStart() {
-   
-    window.addEventListener("mousemove", updateBorderValue);
+    moveHandler = updateBorderValue(setBorderValue);
+    window.addEventListener("mousemove", moveHandler);
     window.addEventListener("mouseup", draggingStop);
-    
   }
 
   function draggingStop() {
-   
-    window.removeEventListener("mousedown",draggingStart);
-    window.removeEventListener("mousemove",updateBorderValue)
-
+    if (moveHandler) {
+      window.removeEventListener("mousemove", moveHandler);
+    }
+    window.removeEventListener("mouseup", draggingStop);
   }
- 
- 
-  
   
 
 
@@ -52,7 +31,7 @@ function BeforeAfter({ beforeimg, afterimg }) {
       <img src={afterimg} alt="afterimg" className="afterImgcs"/>
       
       <div className="border" style={{ left: `${borderValue}%` }}   >
-        <div className="borderBubble"  onMouseDown={draggingStart} />
+        <div className="borderBubble"  onMouseDown={draggingStart} onMouseUp={draggingStop} />
       </div>
     </div>
   );
