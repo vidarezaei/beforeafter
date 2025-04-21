@@ -8,6 +8,7 @@ function BeforeAfterHandler(containerRef) {
   const [draggingState, setDraggingState] = useState(false);
   
 
+
   function updateBorderValue(e) {
     const containerWidth = containerRef.current.offsetWidth;
     const containerLeft = containerRef.current.getBoundingClientRect().left;
@@ -18,6 +19,9 @@ function BeforeAfterHandler(containerRef) {
     );
     setBorderValue(newValue);
   }
+
+
+  
 
   function draggingStart(e) {
     setDraggingState(true);

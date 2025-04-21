@@ -4,6 +4,18 @@ import BeforeAfterHandler from "./BeforeAfterHandler.jsx";
 import BeforeImg from "./BeforeImg.jsx";
 import AfterImg from "./AfterImg.jsx";
 import Borderhandler from "./Borderhandler.jsx";
+import styled from "styled-components";
+const Container=styled.div`
+position: relative;
+    width: 500px;
+    height: 500px;
+    overflow: hidden;
+    cursor: pointer;
+  user-select: none;
+    margin-left:100px;
+`;
+
+ 
 
 function BeforeAfter({beforeimg , afterimg}) {
   const containerRef = useRef(null);
@@ -11,7 +23,7 @@ function BeforeAfter({beforeimg , afterimg}) {
 
 
   return (
-    <div className="container" ref={containerRef}>
+    <Container className="container" ref={containerRef}>
      
         
       
@@ -20,7 +32,7 @@ function BeforeAfter({beforeimg , afterimg}) {
         <Borderhandler borderValue={borderValue}  draggingStart={draggingStart} />
         
       
-</div>
+</Container>
       
   );
 }
