@@ -3,6 +3,7 @@ import "./BeforeAfter.css";
 import BeforeAfterHandler from "./BeforeAfterHandler.jsx";
 import BeforeImg from "./BeforeImg.jsx";
 import AfterImg from "./AfterImg.jsx";
+import Borderhandler from "./Borderhandler.jsx";
 
 function BeforeAfter({beforeimg , afterimg}) {
   const containerRef = useRef(null);
@@ -16,13 +17,11 @@ function BeforeAfter({beforeimg , afterimg}) {
       
         <BeforeImg src={beforeimg}  borderValue={borderValue} />
         <AfterImg src={afterimg} />
+        <Borderhandler borderValue={borderValue}  draggingStart={draggingStart} />
         
       
-
-      <div className="border" style={{ left: `${borderValue}%` }} onMouseDown={draggingStart}>
-        <div className="borderBubble" />
-      </div>
-    </div>
+</div>
+      
   );
 }
 
