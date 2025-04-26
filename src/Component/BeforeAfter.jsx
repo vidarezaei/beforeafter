@@ -1,5 +1,4 @@
 import React, { useRef } from "react";
-import "./BeforeAfter.css";
 import BeforeAfterHandler from "./BeforeAfterHandler.jsx";
 import BeforeImg from "./BeforeImg.jsx";
 import AfterImg from "./AfterImg.jsx";
