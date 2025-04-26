@@ -46,7 +46,7 @@ function BeforeAfterHandler(containerRef,direction,hover) { //function for handl
 
   
 
-  return { borderValue, draggingStart, setBorderValue, draggingState,setDraggingState };
+  return { borderValue, draggingStart, setBorderValue };
 }
 
 export default BeforeAfterHandler;

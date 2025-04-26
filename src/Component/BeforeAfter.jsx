@@ -15,7 +15,7 @@ function BeforeAfter({beforeimg , afterimg}) {
   const [hover,sethover]=useState(false)
   const containerRef = useRef(null);
   const [direction, setdirection]=useState(true)
-  const {borderValue, draggingStart,setBorderValue,draggingState,setDraggingState}=BeforeAfterHandler(containerRef,direction,hover);
+  const {borderValue, draggingStart,setBorderValue}=BeforeAfterHandler(containerRef,direction,hover);
   
   
 
