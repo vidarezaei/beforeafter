@@ -1,31 +1,15 @@
-
-import { useState,useEffect } from "react";
-
-
+import { useState, useEffect } from "react";
+import updateBorderValue from "./updateBorderValue"; 
 
 function BeforeAfterHandler(containerRef) {
   const [borderValue, setBorderValue] = useState(50);
   const [draggingState, setDraggingState] = useState(false);
-  
 
 
-  function updateBorderValue(e) {
-    const containerWidth = containerRef.current.offsetWidth;
-    const containerLeft = containerRef.current.getBoundingClientRect().left;
-
-    const newValue = Math.min(
-      Math.max(((e.clientX - containerLeft) / containerWidth) * 100, 0),
-      100
-    );
-    setBorderValue(newValue);
-  }
-
-
-  
 
   function draggingStart(e) {
     setDraggingState(true);
-    updateBorderValue(e);
+    updateBorderValue(e, containerRef, setBorderValue);
   }
 
   function draggingStop() {
@@ -33,25 +17,29 @@ function BeforeAfterHandler(containerRef) {
   }
 
   useEffect(() => {
+    function handleMouseMove(e) {
+      updateBorderValue(e, containerRef, setBorderValue);
+    }
+
     if (draggingState) {
-      window.addEventListener("mousemove", updateBorderValue);
+      window.addEventListener("mousemove", handleMouseMove);
       window.addEventListener("mouseup", draggingStop);
     } else {
-      window.removeEventListener("mousemove", updateBorderValue);
+      window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("mouseup", draggingStop);
     }
 
     return () => {
-      window.removeEventListener("mousemove", updateBorderValue);
+      window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("mouseup", draggingStop);
     };
   }, [draggingState]);
 
 
 
-  return {borderValue, draggingStart , setBorderValue}
+  
 
+  return { borderValue, draggingStart, setBorderValue, draggingState };
 }
-
 
 export default BeforeAfterHandler;

@@ -3,7 +3,8 @@ import BeforeAfterHandler from "./BeforeAfterHandler.jsx";
 import BeforeImg from "./BeforeImg.jsx";
 import AfterImg from "./AfterImg.jsx";
 import Borderhandler from "./Borderhandler.jsx";
-import * as styled from "../styled/BeforeAfter.styled.js"
+import * as styled from "../styled/BeforeAfter.styled.js";
+import updateBorderValue from "./updateBorderValue.jsx";
 
 
 
@@ -17,7 +18,7 @@ function BeforeAfter({beforeimg , afterimg}) {
 
   return (
   <styled.ComponnentBody>
-    <styled.Container className="container" ref={containerRef}>
+    <styled.Container className="container" ref={containerRef} onClick={(e)=>{updateBorderValue(e, containerRef, setBorderValue)}}>
      
         
       
