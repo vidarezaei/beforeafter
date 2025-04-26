@@ -18,16 +18,13 @@ function BeforeAfter({beforeimg , afterimg}) {
 
   return (
   <styled.ComponnentBody>
-    <styled.Container className="container" ref={containerRef} onClick={(e)=>{updateBorderValue(e, containerRef, setBorderValue)}}>
-     
-        
-      
+    <styled.Container className="container" ref={containerRef} onClick={(e)=>{updateBorderValue(e, containerRef, setBorderValue)}}> {/*onclick: Click on the slider bar to jump to a position */}
         <BeforeImg src={beforeimg}  borderValue={borderValue} />
         <AfterImg src={afterimg} />
-        <Borderhandler borderValue={borderValue}  draggingStart={draggingStart} />    
+        <Borderhandler borderValue={borderValue}  draggingStart={draggingStart} /> {/* use draggingstart for mouse down event  */}
     </styled.Container>
 
-
+  
     <styled.BtnContainer>
 
       <styled.Btn onClick={()=>{setBorderValue(100)}}>Before</styled.Btn>
