@@ -29,9 +29,26 @@ const BorderBubble=styled.div`
 
 `;
 
-function Borderhandler({borderValue,draggingStart}){
+function Borderhandler({borderValue,draggingStart, direction}){
+    
+    const borderstyle=(!direction)?{ 
+    top:`${borderValue}%`,
+    width:'100%',
+    height:'2px',
+    left:'0'
+    }:{ 
+        left:`${borderValue}%`,
+        width:'2px',
+        height:'100%',
+        top:'0'
+        };
+
+
+    
+   
 return(
-    <Border  style={{ left: `${borderValue}%` }} onMouseDown={draggingStart}>
+   
+   <Border  style={ borderstyle}  onMouseDown={draggingStart} className="">
         <BorderBubble  />
     </Border>
 )
