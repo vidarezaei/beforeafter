@@ -22,19 +22,13 @@ import BeforeAfter from "./Component/BeforeAfter"
 
 ## Props
 
-| Prop (\* required)       | type                    |   default   | description                                                                                                           |
-| ------------------------ | ----------------------- | :---------: | --------------------------------------------------------------------------------------------------------------------- |
-| aspectRatio              | `'taller'` or `'wider'` | `'taller'`  | Which to choose if the aspect ratios of the images are different                                                      |
-| handle                   | element                 |    null     | Custom handle element. Just pass `<React.Fragment />` if you want to remove handle.                                   |
-| handleSize               | number (px)             |     40      | diameter of slider handle (by pixel)                                                                                  |
-| hover                    | boolean                 |    false    | Whether to slide at hover                                                                                             |
-| leftImage \*             | string                  |    null     | left image's url                                                                                                      |
-| leftImageAlt             | string                  |    `''`     | alt props for left image                                                                                              |
-| leftImageCss             | object                  |     {}      | Additional css for left image                                                                                         |
-| leftImageLabel           | string                  |    null     | Label for the image (e.g. `before`)                                                                                   |
-| onSliderPositionChange   | function                |    null     | Callback function called each time the slider changes. The position (0 to 1) of the slider is passed as arg           |
-| rightImage \*            | string                  |    null     | right image's url                                                                                                     |
-| rightImageAlt            | string                  |    `''`     | alt props for right image                                                                                             |
+| Prop (\* required)       | type                    |   default   | description                             |
+| ------------------------ | ----------------------- | :---------: | ----------------------------------------|
+| beforeimg                | string(img url)         |    null     | url of before img                       |
+| afterimg                 | string(img url)         |    null     | url of after img                        |
+| borderValue              | number                  |     50      | *100 diameter of slider handle          |
+| setDraggingState         | boolean                 |    false    | Whether to hold the mouse down to change the line position |
+
 
 
 
