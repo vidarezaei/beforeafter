@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import updateBorderValue from "./updateBorderValue"; 
 
-function BeforeAfterHandler(containerRef,direction) { //function for handle mouse movement when user drag border or bubble
+function BeforeAfterHandler(containerRef,direction,hover) { //function for handle mouse movement when user drag border or bubble
   const [borderValue, setBorderValue] = useState(50);
   const [draggingState, setDraggingState] = useState(false);
 
@@ -18,7 +18,14 @@ function BeforeAfterHandler(containerRef,direction) { //function for handle mous
 
   useEffect(() => {
     function handleMouseMove(e) {
-      updateBorderValue(e, containerRef, setBorderValue,direction);
+      if(!hover & draggingState){
+        updateBorderValue(e, containerRef, setBorderValue,direction);
+      }
+      else if(hover & !draggingState ){
+        draggingStop() ;
+        window.removeEventListener("mousemove", handleMouseMove);
+      }
+      
     }
 
     if (draggingState) {
@@ -39,7 +46,7 @@ function BeforeAfterHandler(containerRef,direction) { //function for handle mous
 
   
 
-  return { borderValue, draggingStart, setBorderValue, draggingState };
+  return { borderValue, draggingStart, setBorderValue, draggingState,setDraggingState };
 }
 
 export default BeforeAfterHandler;
