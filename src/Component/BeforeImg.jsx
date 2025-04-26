@@ -8,6 +8,7 @@ width: 100%;
 overflow: hidden;
 object-fit: cover;
  z-index: 2;
+ 
 `;
 function BeforeImg({src,borderValue}){
  

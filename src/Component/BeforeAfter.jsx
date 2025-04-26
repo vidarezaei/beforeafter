@@ -1,37 +1,41 @@
-import React, { useRef } from "react";
+import React, { useRef ,useState} from "react";
 import BeforeAfterHandler from "./BeforeAfterHandler.jsx";
 import BeforeImg from "./BeforeImg.jsx";
 import AfterImg from "./AfterImg.jsx";
 import Borderhandler from "./Borderhandler.jsx";
-import styled from "styled-components";
-const Container=styled.div`
-position: relative;
-    width: 500px;
-    height: 500px;
-    overflow: hidden;
-    cursor: pointer;
-  user-select: none;
-    margin-left:100px;
-`;
+import * as styled from "../styled/BeforeAfter.styled.js"
+
+
+
 
  
 
 function BeforeAfter({beforeimg , afterimg}) {
   const containerRef = useRef(null);
-  const {borderValue, draggingStart}=BeforeAfterHandler(containerRef);
+  const {borderValue, draggingStart,setBorderValue}=BeforeAfterHandler(containerRef);
 
 
   return (
-    <Container className="container" ref={containerRef}>
+  <styled.ComponnentBody>
+    <styled.Container className="container" ref={containerRef}>
      
         
       
         <BeforeImg src={beforeimg}  borderValue={borderValue} />
         <AfterImg src={afterimg} />
-        <Borderhandler borderValue={borderValue}  draggingStart={draggingStart} />
-        
-      
-</Container>
+        <Borderhandler borderValue={borderValue}  draggingStart={draggingStart} />    
+    </styled.Container>
+
+
+    <styled.BtnContainer>
+
+      <styled.Btn onClick={()=>{setBorderValue(100)}}>Before</styled.Btn>
+      <styled.Btn onClick={()=>{setBorderValue(0)}} >after</styled.Btn>
+
+    </styled.BtnContainer>
+
+
+</styled.ComponnentBody>
       
   );
 }

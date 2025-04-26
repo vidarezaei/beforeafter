@@ -11,6 +11,7 @@ position: absolute;
     display: flex;
     align-items: center;
     justify-content: center;
+
 `;
 
 const BorderBubble=styled.div`
@@ -23,6 +24,8 @@ const BorderBubble=styled.div`
     top: 50%;
   left: 50%;
   transform: translateX(-50%) translateY(-50%);
+ 
+  
 
 `;
 

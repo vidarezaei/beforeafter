@@ -49,7 +49,7 @@ function BeforeAfterHandler(containerRef) {
 
 
 
-  return {borderValue, draggingStart}
+  return {borderValue, draggingStart , setBorderValue}
 
 }
 
