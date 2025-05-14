@@ -9,7 +9,7 @@ overflow: hidden;
 object-fit: cover;
 z-index: 1;
     `;
-function AfterImg({src}){
+function AfterImg({src}) {
     
 return(
     <AfterIm src={src} alt="afterimg" />

@@ -11,11 +11,13 @@ object-fit: cover;
  
  
 `;
-function BeforeImg({src,borderValue ,direction}){
+function BeforeImg({src, borderValue, direction}) {
  
     return(
         <BeforeIm src={src} alt="beforeimg"  style={{ 
-            clipPath:(direction)? `polygon(0 0 ,  ${borderValue}%  0 , ${borderValue}%  100% , 0 100% )` : `polygon(0  0 ,100% 0, 100%  ${borderValue}%  ,0 ${borderValue}%   )`
+            clipPath:(direction)?
+             `polygon(0 0 ,  ${borderValue}%  0 , ${borderValue}%  100% , 0 100% )` 
+            :`polygon(0  0 ,100% 0, 100%  ${borderValue}%  ,0 ${borderValue}%   )`
         }} />
         
     )

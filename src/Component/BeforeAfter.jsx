@@ -1,4 +1,4 @@
-import React, { use, useRef ,useState} from "react";
+import React, {  useRef ,useState} from "react";
 import BeforeAfterHandler from "./BeforeAfterHandler.jsx";
 import BeforeImg from "./BeforeImg.jsx";
 import AfterImg from "./AfterImg.jsx";
@@ -11,8 +11,8 @@ import updateBorderValue from "./updateBorderValue.jsx";
 
  
 
-function BeforeAfter({beforeimg , afterimg}) {
-  const [hover,sethover]=useState(false)
+function BeforeAfter( {beforeimg, afterimg} ) {
+  const [hover, sethover]=useState(false)
   const containerRef = useRef(null);
   const [direction, setdirection]=useState(true)
   const {borderValue, draggingStart,setBorderValue}=BeforeAfterHandler(containerRef,direction,hover);
@@ -22,10 +22,17 @@ function BeforeAfter({beforeimg , afterimg}) {
 
   return (
   <styled.ComponnentBody>
-    <styled.Container className="container" ref={containerRef} onClick={(e)=>{updateBorderValue(e, containerRef, setBorderValue,direction)}}  onMouseMove={(hover)?(e)=>{updateBorderValue(e, containerRef, setBorderValue,direction)}:()=>{}} > {/*onclick: Click on the slider bar to jump to a position */}
-        <BeforeImg src={beforeimg}  borderValue={borderValue}  direction={direction}/>
-        <AfterImg src={afterimg} />
-        <Borderhandler borderValue={borderValue}  draggingStart={draggingStart} direction={direction}/> {/* use draggingstart for mouse down event  */}
+    <styled.Container  ref={containerRef}
+                       onClick={(e)=>{updateBorderValue(e, containerRef, setBorderValue,direction)}}    
+                       onMouseMove={(hover)?(e)=>{updateBorderValue(e, containerRef, setBorderValue,direction)}:()=>{}} 
+                       > {/*onclick: Click on the slider bar to jump to a position */}
+
+
+      <BeforeImg src={beforeimg}  borderValue={borderValue}  direction={direction}/>
+      <AfterImg src={afterimg} />
+      <Borderhandler borderValue={borderValue}  draggingStart={draggingStart} direction={direction}/> {/* use draggingstart for mouse down event  */}
+
+
     </styled.Container>
 
   
