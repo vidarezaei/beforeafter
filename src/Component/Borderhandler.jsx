@@ -25,8 +25,8 @@ const BorderBubble = styled.div`
   transform: translateX(-50%) translateY(-50%);
 `;
 
-function Borderhandler({ borderValue, draggingStart, direction }) {
-  const borderstyle = !direction
+function Borderhandler({ borderValue, startDragging, isVertical }) {
+  const borderstyle = !isVertical
     ? {
         top: `${borderValue}%`,
         width: "100%",
@@ -41,7 +41,7 @@ function Borderhandler({ borderValue, draggingStart, direction }) {
       };
 
   return (
-    <Border style={borderstyle} onMouseDown={draggingStart} className="">
+    <Border style={borderstyle} onMouseDown={startDragging} className="">
       <BorderBubble />
     </Border>
   );

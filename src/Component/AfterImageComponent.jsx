@@ -1,5 +1,5 @@
 import styled from "styled-components";
-const AfterIm = styled.img`
+const AfterImage = styled.img`
   position: absolute;
   top: 0;
   left: 0;
@@ -9,7 +9,7 @@ const AfterIm = styled.img`
   object-fit: cover;
   z-index: 1;
 `;
-function AfterImg({ src }) {
-  return <AfterIm src={src} alt="afterimg" />;
+function AfterImageComponent({ src }) {
+  return <AfterImage src={src} alt="afterimg" />;
 }
-export default AfterImg;
+export default AfterImageComponent;

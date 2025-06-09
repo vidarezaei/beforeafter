@@ -1,51 +1,50 @@
 import React, { useRef, useState } from "react";
-import BeforeAfterHandler from "./BeforeAfterHandler.jsx";
-import BeforeImg from "./BeforeImg.jsx";
-import AfterImg from "./AfterImg.jsx";
+import useBeforeAfterInteraction from "./useBeforeAfterInteraction.jsx";
+import BeforeImagecomponent from "./BeforeImagecomponent.jsx";
+import AfterImageComponent from "./AfterImageComponent.jsx";
 import Borderhandler from "./Borderhandler.jsx";
 import * as styled from "../styled/BeforeAfter.styled.js";
-import updateBorderValue from "./updateBorderValue.jsx";
-
-
+import calculateSliderPosition from "./calculateSliderPosition.jsx";
 function BeforeAfter({ beforeimg, afterimg }) {
-  const [hover, sethover] = useState(false);
+  const [isHoverEnabled, setisHoverEnabled] = useState(false);
   const containerRef = useRef(null);
-  const [direction, setdirection] = useState(true);
-  const { borderValue, draggingStart, setBorderValue } = BeforeAfterHandler(
-    containerRef,
-    direction,
-    hover,
-  );
+  const [isVertical, setisVertical] = useState(true);
+  const { borderValue, startDragging, setBorderValue } =
+    useBeforeAfterInteraction(containerRef, isVertical, isHoverEnabled);
 
   return (
     <styled.ComponnentBody>
       <styled.Container
         ref={containerRef}
         onClick={(e) => {
-          updateBorderValue(e, containerRef, setBorderValue, direction);
+          calculateSliderPosition(e, containerRef, setBorderValue, isVertical);
         }}
         onMouseMove={
-          hover
+          isHoverEnabled
             ? (e) => {
-                updateBorderValue(e, containerRef, setBorderValue, direction);
+                calculateSliderPosition(
+                  e,
+                  containerRef,
+                  setBorderValue,
+                  isVertical,
+                );
               }
             : () => {}
         }
       >
-        {" "}
         {/*onclick: Click on the slider bar to jump to a position */}
-        <BeforeImg
+        <BeforeImagecomponent
           src={beforeimg}
           borderValue={borderValue}
-          direction={direction}
+          isVertical={isVertical}
         />
-        <AfterImg src={afterimg} />
+        <AfterImageComponent src={afterimg} />
         <Borderhandler
           borderValue={borderValue}
-          draggingStart={draggingStart}
-          direction={direction}
-        />{" "}
-        {/* use draggingstart for mouse down event  */}
+          startDragging={startDragging}
+          isVertical={isVertical}
+        />
+        {/* use startDragging for mouse down event  */}
       </styled.Container>
 
       <styled.BtnContainer>
@@ -65,14 +64,14 @@ function BeforeAfter({ beforeimg, afterimg }) {
         </styled.Btn>
         <styled.Btn
           onClick={() => {
-            setdirection(!direction);
+            setisVertical(!isVertical);
           }}
         >
           change direction
         </styled.Btn>
         <styled.Btn
           onClick={() => {
-            sethover(!hover);
+            setisHoverEnabled(!isHoverEnabled);
           }}
         >
           active/deactive hover

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
-import updateBorderValue from "./updateBorderValue";
+import calculateSliderPosition from "./calculateSliderPosition";
 
-function BeforeAfterHandler(containerRef, direction) {
+function useBeforeAfterInteraction(containerRef, isVertical) {
   //function for handle mouse movement when user drag border or bubble
   const [borderValue, setBorderValue] = useState(50);
   const [draggingState, setDraggingState] = useState(false);
@@ -9,7 +9,7 @@ function BeforeAfterHandler(containerRef, direction) {
   useEffect(() => {
     function handleMouseMove(e) {
       if (draggingState) {
-        updateBorderValue(e, containerRef, setBorderValue, direction);
+        calculateSliderPosition(e, containerRef, setBorderValue, isVertical);
       }
     }
 
@@ -27,16 +27,16 @@ function BeforeAfterHandler(containerRef, direction) {
     };
   }, [draggingState]);
 
-  function draggingStart(e) {
+  function startDragging(e) {
     setDraggingState(true);
-    updateBorderValue(e, containerRef, setBorderValue, direction);
+    calculateSliderPosition(e, containerRef, setBorderValue, isVertical);
   }
 
   function draggingStop() {
     setDraggingState(false);
   }
 
-  return { borderValue, draggingStart, setBorderValue };
+  return { borderValue, startDragging, setBorderValue };
 }
 
-export default BeforeAfterHandler;
+export default useBeforeAfterInteraction;

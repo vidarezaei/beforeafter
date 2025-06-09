@@ -1,5 +1,5 @@
 import styled from "styled-components";
-const BeforeIm = styled.img`
+const BeforeImage = styled.img`
   position: absolute;
   top: 0;
   left: 0;
@@ -9,13 +9,13 @@ const BeforeIm = styled.img`
   object-fit: cover;
   z-index: 2;
 `;
-function BeforeImg({ src, borderValue, direction }) {
+function BeforeImagecomponent({ src, borderValue, isVertical }) {
   return (
-    <BeforeIm
+    <BeforeImage
       src={src}
       alt="beforeimg"
       style={{
-        clipPath: direction
+        clipPath: isVertical
           ? `polygon(0 0 ,  ${borderValue}%  0 , ${borderValue}%  100% , 0 100% )`
           : `polygon(0  0 ,100% 0, 100%  ${borderValue}%  ,0 ${borderValue}%   )`,
       }}
@@ -23,4 +23,4 @@ function BeforeImg({ src, borderValue, direction }) {
   );
 }
 
-export default BeforeImg;
+export default BeforeImagecomponent;

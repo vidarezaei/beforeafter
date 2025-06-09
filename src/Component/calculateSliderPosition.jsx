@@ -1,11 +1,11 @@
-function updateBorderValue(e, containerRef, setBorderValue, direction) {
+function calculateSliderPosition(e, containerRef, setBorderValue, isVertical) {
   const containerWidth = containerRef.current.offsetWidth;
   const containerLeft = containerRef.current.getBoundingClientRect().left;
   const containerHeight = containerRef.current.offsetHeight;
   const containertop = containerRef.current.getBoundingClientRect().top;
 
   setBorderValue(
-    direction
+    isVertical
       ? Math.max(
           Math.min(((e.clientX - containerLeft) / containerWidth) * 100, 100),
           0,
@@ -17,4 +17,4 @@ function updateBorderValue(e, containerRef, setBorderValue, direction) {
   );
 }
 
-export default updateBorderValue;
+export default calculateSliderPosition;
