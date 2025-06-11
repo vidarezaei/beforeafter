@@ -21,7 +21,6 @@ export default defineConfig([
     },
     extends: ["js/recommended"],
     rules: {
-      // حذف import های بلااستفاده
       "no-unused-vars": "off",
       "unused-imports/no-unused-imports": "error",
       "unused-imports/no-unused-vars": [
@@ -34,7 +33,6 @@ export default defineConfig([
         },
       ],
 
-      // قانون نام‌گذاری توابع
       "@typescript-eslint/naming-convention": [
         "error",
         {
