@@ -11,26 +11,16 @@ function BeforeAfter({ beforeimg, afterimg }) {
   const [isVertical, setisVertical] = useState(true);
   const { borderValue, startDragging, setBorderValue } =
     useBeforeAfterInteraction(containerRef, isVertical, isHoverEnabled);
+  const updatePosition = (e) => {
+    calculateSliderPosition(e, containerRef, setBorderValue, isVertical);
+  };
 
   return (
     <styled.ComponnentBody>
       <styled.Container
         ref={containerRef}
-        onClick={(e) => {
-          calculateSliderPosition(e, containerRef, setBorderValue, isVertical);
-        }}
-        onMouseMove={
-          isHoverEnabled
-            ? (e) => {
-                calculateSliderPosition(
-                  e,
-                  containerRef,
-                  setBorderValue,
-                  isVertical,
-                );
-              }
-            : () => {}
-        }
+        onClick={updatePosition}
+        onMouseMove={isHoverEnabled ? updatePosition : null}
       >
         {/*onclick: Click on the slider bar to jump to a position */}
         <BeforeImagecomponent
