@@ -5,6 +5,8 @@ function App() {
     <BeforeAfter
       beforeimg="../assets/before.jpg"
       afterimg="../assets/after.jpg"
+      isVertical={false}
+      isHoverEnabled={false}
     />
   );
 }

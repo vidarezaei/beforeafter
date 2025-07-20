@@ -3,12 +3,10 @@ import useBeforeAfterInteraction from "./useBeforeAfterInteraction.jsx";
 import BeforeImagecomponent from "./BeforeImagecomponent.jsx";
 import AfterImageComponent from "./AfterImageComponent.jsx";
 import Borderhandler from "./Borderhandler.jsx";
-import * as styled from "../styled/BeforeAfter.styled.js";
+import * as SC from "../styled/BeforeAfter.styled.js";
 import calculateSliderPosition from "./calculateSliderPosition.jsx";
-function BeforeAfter({ beforeimg, afterimg }) {
-  const [isHoverEnabled, setisHoverEnabled] = useState(false);
+function BeforeAfter({ beforeimg, afterimg, isVertical, isHoverEnabled }) {
   const containerRef = useRef(null);
-  const [isVertical, setisVertical] = useState(true);
   const { borderValue, startDragging, setBorderValue } =
     useBeforeAfterInteraction(containerRef, isVertical, isHoverEnabled);
   const updatePosition = (e) => {
@@ -16,8 +14,8 @@ function BeforeAfter({ beforeimg, afterimg }) {
   };
 
   return (
-    <styled.ComponnentBody>
-      <styled.Container
+    <SC.ComponnentBody>
+      <SC.Container
         ref={containerRef}
         onClick={updatePosition}
         onMouseMove={isHoverEnabled ? updatePosition : null}
@@ -35,39 +33,25 @@ function BeforeAfter({ beforeimg, afterimg }) {
           isVertical={isVertical}
         />
         {/* use startDragging for mouse down event  */}
-      </styled.Container>
+      </SC.Container>
 
-      <styled.BtnContainer>
-        <styled.Btn
+      <SC.BtnContainer>
+        <SC.Btn
           onClick={() => {
             setBorderValue(100);
           }}
         >
           Before
-        </styled.Btn>
-        <styled.Btn
+        </SC.Btn>
+        <SC.Btn
           onClick={() => {
             setBorderValue(0);
           }}
         >
           after
-        </styled.Btn>
-        <styled.Btn
-          onClick={() => {
-            setisVertical(!isVertical);
-          }}
-        >
-          change direction
-        </styled.Btn>
-        <styled.Btn
-          onClick={() => {
-            setisHoverEnabled(!isHoverEnabled);
-          }}
-        >
-          active/deactive hover
-        </styled.Btn>
-      </styled.BtnContainer>
-    </styled.ComponnentBody>
+        </SC.Btn>
+      </SC.BtnContainer>
+    </SC.ComponnentBody>
   );
 }
 
