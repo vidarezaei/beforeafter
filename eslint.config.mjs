@@ -1,45 +1,44 @@
-import js from "@eslint/js";
 import globals from "globals";
-import pluginReact from "eslint-plugin-react";
-import pluginUnusedImports from "eslint-plugin-unused-imports";
-import eslintConfigPrettier from "eslint-config-prettier/flat";
-import { defineConfig } from "eslint/config";
+import importPlugin from 'eslint-plugin-import';
+import eslint from '@eslint/js';
+import prettier from 'eslint-plugin-prettier';
+import react from 'eslint-plugin-react';
+import jsxA11y from 'eslint-plugin-jsx-a11y';
+import reactHook from 'eslint-plugin-react-hooks';
 
-export default defineConfig([
+export default [
+  eslint.configs.recommended,
   {
     files: ["**/*.{js,jsx}"],
     languageOptions: {
       ecmaVersion: "latest",
       sourceType: "module",
       globals: globals.browser,
+      parserOptions: {
+        ecmaFeatures: {
+          jsx: true,
+        },
+      }
     },
     plugins: {
-      js,
-      "unused-imports": pluginUnusedImports,
-      react: pluginReact,
+      import: importPlugin,
+      prettier: prettier,
+      react: react,
+      'jsx-a11y': jsxA11y,
+      'react-hooks': reactHook,
     },
-    extends: ["js/recommended", "plugin:react/recommended"],
+    settings: {
+      react: {
+        version: 'detect',
+      },
+    },
     rules: {
-      "no-unused-vars": "warn",
-      "unused-imports/no-unused-imports": "error",
-      "unused-imports/no-unused-vars": [
-        "warn",
-        {
-          vars: "all",
-          varsIgnorePattern: "^_",
-          args: "after-used",
-          argsIgnorePattern: "^_",
-        },
-      ],
-      camelcase: [
-        "error",
-        {
-          properties: "always", // بررسی پراپرتی‌ها هم
-          ignoreDestructuring: false,
-        },
-      ],
-      "react/jsx-pascal-case": ["error"],
+      'react/jsx-uses-vars': 'warn',
+      'import/no-named-as-default': 'off',
+      'react-hooks/rules-of-hooks': 'error',
+      'react-hooks/exhaustive-deps': 'warn',
+      'react/prop-types': 'off',
+      'react/self-closing-comp': 'warn',
     },
   },
-  eslintConfigPrettier, // همیشه آخر
-]);
+]
