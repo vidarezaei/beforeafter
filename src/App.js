@@ -1,10 +1,10 @@
-import BeforeAfter from "./Component/BeforeAfter";
+import BeforeAfter from "./components/BeforeAfter";
 
 function App() {
   return (
     <BeforeAfter
-      beforeimg="../assets/before.jpg"
-      afterimg="../assets/after.jpg"
+      beforeImg="../assets/before.jpg"
+      afterImg="../assets/after.jpg"
       isVertical={false}
       isHoverEnabled={false}
     />

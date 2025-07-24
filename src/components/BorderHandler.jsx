@@ -25,7 +25,7 @@ const BorderBubble = styled.div`
   transform: translateX(-50%) translateY(-50%);
 `;
 
-function Borderhandler({ borderValue, startDragging, isVertical }) {
+function BorderHandler({ borderValue, startDragging, isVertical }) {
   const borderstyle = !isVertical
     ? {
         top: `${borderValue}%`,
@@ -46,4 +46,4 @@ function Borderhandler({ borderValue, startDragging, isVertical }) {
     </Border>
   );
 }
-export default Borderhandler;
+export default BorderHandler;

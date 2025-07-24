@@ -3,25 +3,24 @@ import globals from "globals";
 import pluginReact from "eslint-plugin-react";
 import pluginUnusedImports from "eslint-plugin-unused-imports";
 import eslintConfigPrettier from "eslint-config-prettier/flat";
-import pluginTs from "@typescript-eslint/eslint-plugin";
-import parserTs from "@typescript-eslint/parser";
 import { defineConfig } from "eslint/config";
 
 export default defineConfig([
   {
-    files: ["**/*.{js,jsx,ts,tsx}"],
+    files: ["**/*.{js,jsx}"],
     languageOptions: {
-      parser: parserTs,
+      ecmaVersion: "latest",
+      sourceType: "module",
       globals: globals.browser,
     },
     plugins: {
       js,
       "unused-imports": pluginUnusedImports,
-      "@typescript-eslint": pluginTs,
+      react: pluginReact,
     },
-    extends: ["js/recommended"],
+    extends: ["js/recommended", "plugin:react/recommended"],
     rules: {
-      "no-unused-vars": "off",
+      "no-unused-vars": "warn",
       "unused-imports/no-unused-imports": "error",
       "unused-imports/no-unused-vars": [
         "warn",
@@ -32,18 +31,15 @@ export default defineConfig([
           argsIgnorePattern: "^_",
         },
       ],
-
-      "@typescript-eslint/naming-convention": [
+      camelcase: [
         "error",
         {
-          selector: "function",
-          format: ["camelCase"],
-          leadingUnderscore: "allow",
+          properties: "always", // بررسی پراپرتی‌ها هم
+          ignoreDestructuring: false,
         },
       ],
+      "react/jsx-pascal-case": ["error"],
     },
   },
-
-  pluginReact.configs.flat.recommended,
-  eslintConfigPrettier, // همیشه آخر باشه
+  eslintConfigPrettier, // همیشه آخر
 ]);

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import calculateSliderPosition from "./calculateSliderPosition";
+import calculateSliderPosition from "../helpers/calculateSliderPosition";
 
 function useBeforeAfterInteraction(containerRef, isVertical) {
   //function for handle mouse movement when user drag border or bubble

@@ -1,11 +1,13 @@
-import React, { useRef, useState } from "react";
-import useBeforeAfterInteraction from "./useBeforeAfterInteraction.jsx";
-import BeforeImagecomponent from "./BeforeImagecomponent.jsx";
-import AfterImageComponent from "./AfterImageComponent.jsx";
-import Borderhandler from "./Borderhandler.jsx";
+import { useRef } from "react";
+import { useState } from "react";
+import useBeforeAfterInteraction from "../hooks/useBeforeAfterInteraction.jsx";
+import BeforeImage from "./BeforeImage.jsx";
+import AfterImage from "./AfterImage.jsx";
+import BorderHandler from "./BorderHandler.jsx";
 import * as SC from "../styled/BeforeAfter.styled.js";
-import calculateSliderPosition from "./calculateSliderPosition.jsx";
-function BeforeAfter({ beforeimg, afterimg, isVertical, isHoverEnabled }) {
+import calculateSliderPosition from "../helpers/calculateSliderPosition.jsx";
+
+function BeforeAfter({ beforeImg, afterImg, isVertical, isHoverEnabled }) {
   const containerRef = useRef(null);
   const { borderValue, startDragging, setBorderValue } =
     useBeforeAfterInteraction(containerRef, isVertical, isHoverEnabled);
@@ -21,13 +23,13 @@ function BeforeAfter({ beforeimg, afterimg, isVertical, isHoverEnabled }) {
         onMouseMove={isHoverEnabled ? updatePosition : null}
       >
         {/*onclick: Click on the slider bar to jump to a position */}
-        <BeforeImagecomponent
-          src={beforeimg}
+        <BeforeImage
+          src={beforeImg}
           borderValue={borderValue}
           isVertical={isVertical}
         />
-        <AfterImageComponent src={afterimg} />
-        <Borderhandler
+        <AfterImage src={afterImg} />
+        <BorderHandler
           borderValue={borderValue}
           startDragging={startDragging}
           isVertical={isVertical}
