@@ -7,12 +7,6 @@ function useBeforeAfterInteraction(containerRef, isVertical) {
    const [draggingState, setDraggingState] = useState(false);
 
    useEffect(() => {
-      function handleMouseMove(e) {
-         if (draggingState) {
-            calculateSliderPosition(e, containerRef, setBorderValue, isVertical);
-         }
-      }
-
       if (draggingState) {
          window.addEventListener('mousemove', handleMouseMove);
          window.addEventListener('mouseup', draggingStop);
@@ -34,6 +28,11 @@ function useBeforeAfterInteraction(containerRef, isVertical) {
 
    function draggingStop() {
       setDraggingState(false);
+   }
+   function handleMouseMove(e) {
+      if (draggingState) {
+         calculateSliderPosition(e, containerRef, setBorderValue, isVertical);
+      }
    }
 
    return { borderValue, startDragging, setBorderValue };
