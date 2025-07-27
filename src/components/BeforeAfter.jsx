@@ -3,51 +3,28 @@ import useBeforeAfterInteraction from '../hooks/useBeforeAfterInteraction.jsx';
 import CreateImage from './CreateImage.jsx';
 import BorderHandler from './BorderHandler.jsx';
 import * as SC from '../styled/BeforeAfter.styled.js';
-import calculateSliderPosition from '../helpers/calculateSliderPosition.jsx';
 
-function BeforeAfter({ beforeImg, afterImg, isVertical, isHoverEnabled }) {
+function BeforeAfter({ beforeImg, afterImg, isVertical, isHoverEnabled, value, onChange }) {
    const containerRef = useRef(null);
-   const { borderValue, startDragging, setBorderValue } = useBeforeAfterInteraction(
-      containerRef,
-      isVertical,
-      isHoverEnabled
-   );
+   const { startDragging, calculatePosition } = useBeforeAfterInteraction(containerRef, isVertical, onChange);
+
    const updatePosition = (e) => {
-      calculateSliderPosition(e, containerRef, setBorderValue, isVertical);
+      calculatePosition(e);
    };
 
    return (
-      <SC.ComponentBody>
-         <SC.Container ref={containerRef} onClick={updatePosition} onMouseMove={isHoverEnabled ? updatePosition : null}>
-            {/*onclick: Click on the slider bar to jump to a position */}
-            <CreateImage src={beforeImg} borderValue={borderValue} isVertical={isVertical} isBefore={true} />
-            <CreateImage src={afterImg} />
-            <BorderHandler
-               borderValue={borderValue}
-               startDragging={startDragging}
-               isVertical={isVertical}
-               style={{ zIndex: 1 }}
-            />
-            {/* use startDragging for mouse down event  */}
-         </SC.Container>
-
-         <SC.BtnContainer>
-            <SC.Btn
-               onClick={() => {
-                  setBorderValue(100);
-               }}
-            >
-               Before
-            </SC.Btn>
-            <SC.Btn
-               onClick={() => {
-                  setBorderValue(0);
-               }}
-            >
-               after
-            </SC.Btn>
-         </SC.BtnContainer>
-      </SC.ComponentBody>
+      <SC.Container ref={containerRef} onClick={updatePosition} onMouseMove={isHoverEnabled ? updatePosition : null}>
+         {/*onclick: Click on the slider bar to jump to a position */}
+         <CreateImage src={beforeImg} borderValue={value} isVertical={isVertical} isBefore={true} />
+         <CreateImage src={afterImg} />
+         <BorderHandler
+            borderValue={value}
+            startDragging={startDragging}
+            isVertical={isVertical}
+            style={{ zIndex: 1 }}
+         />
+         {/* use startDragging for mouse down event  */}
+      </SC.Container>
    );
 }
 

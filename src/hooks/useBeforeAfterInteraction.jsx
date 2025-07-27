@@ -1,10 +1,36 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import calculateSliderPosition from '../helpers/calculateSliderPosition';
 
-function useBeforeAfterInteraction(containerRef, isVertical) {
+function useBeforeAfterInteraction(containerRef, isVertical, onChange) {
    //function for handle mouse movement when user drag border or bubble
-   const [borderValue, setBorderValue] = useState(50);
    const [draggingState, setDraggingState] = useState(false);
+
+   function calculatePosition(e) {
+      if (containerRef.current) {
+         const position = calculateSliderPosition(e, containerRef, isVertical);
+         onChange(position);
+      }
+   }
+
+   function startDragging(e) {
+      setDraggingState(true);
+      const position = calculateSliderPosition(e, containerRef, isVertical);
+      onChange(position);
+   }
+
+   function draggingStop() {
+      setDraggingState(false);
+   }
+
+   const handleMouseMove = useCallback(
+      (e) => {
+         if (draggingState) {
+            const position = calculateSliderPosition(e, containerRef, isVertical);
+            onChange(position);
+         }
+      },
+      [draggingState, containerRef, isVertical, onChange]
+   );
 
    useEffect(() => {
       if (draggingState) {
@@ -19,23 +45,9 @@ function useBeforeAfterInteraction(containerRef, isVertical) {
          window.removeEventListener('mousemove', handleMouseMove);
          window.removeEventListener('mouseup', draggingStop);
       };
-   }, [draggingState]);
+   }, [draggingState, containerRef, isVertical, onChange, handleMouseMove]);
 
-   function startDragging(e) {
-      setDraggingState(true);
-      calculateSliderPosition(e, containerRef, setBorderValue, isVertical);
-   }
-
-   function draggingStop() {
-      setDraggingState(false);
-   }
-   function handleMouseMove(e) {
-      if (draggingState) {
-         calculateSliderPosition(e, containerRef, setBorderValue, isVertical);
-      }
-   }
-
-   return { borderValue, startDragging, setBorderValue };
+   return { startDragging, calculatePosition };
 }
 
 export default useBeforeAfterInteraction;

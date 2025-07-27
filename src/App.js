@@ -1,14 +1,7 @@
-import BeforeAfter from './components/BeforeAfter';
+import Main from './Main';
 
 function App() {
-   return (
-      <BeforeAfter
-         beforeImg="../assets/before.jpg"
-         afterImg="../assets/after.jpg"
-         isVertical={false}
-         isHoverEnabled={false}
-      />
-   );
+   return <Main />;
 }
 
 export default App;
