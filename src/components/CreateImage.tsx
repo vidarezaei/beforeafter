@@ -9,8 +9,14 @@ const StyledImage = styled.img`
    overflow: hidden;
    object-fit: cover;
 `;
+interface CreateImageProps {
+   src: string;
+   isBefore: boolean;
+   isVertical: boolean;
+   borderValue: number;
+}
 
-function CreateImage({ src, isBefore, borderValue, isVertical }) {
+function CreateImage({ src, isBefore, borderValue, isVertical }: CreateImageProps) {
    const clipPath = isBefore
       ? isVertical
          ? `polygon(0 0, ${borderValue}% 0, ${borderValue}% 100%, 0 100%)`
