@@ -24,8 +24,13 @@ const BorderBubble = styled.div`
    left: 50%;
    transform: translateX(-50%) translateY(-50%);
 `;
-
-function BorderHandler(props: { borderValue: any; startDragging: any; isVertical: any }) {
+interface BorderHandlerProps {
+   borderValue: any;
+   startDragging: any;
+   isVertical: any;
+   style?: React.CSSProperties;
+}
+function BorderHandler({ borderValue, startDragging, isVertical }: BorderHandlerProps) {
    const borderDirection = !isVertical
       ? {
            top: `${borderValue}%`,

@@ -17,11 +17,11 @@ interface CreateImageProps {
 }
 
 function CreateImage({ src, isBefore, borderValue, isVertical }: CreateImageProps) {
-   const clipPath = isBefore
+   const clipPath: string = isBefore
       ? isVertical
          ? `polygon(0 0, ${borderValue}% 0, ${borderValue}% 100%, 0 100%)`
          : `polygon(0 0, 100% 0, 100% ${borderValue}%, 0 ${borderValue}%)`
-      : null;
+      : 'none';
 
    return (
       <StyledImage

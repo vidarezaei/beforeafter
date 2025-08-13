@@ -5,11 +5,11 @@ import { useState } from 'react';
 const Main = () => {
    const [value, setValue] = useState<number>(50);
 
-   const onBefore = (e) => {
+   const onBefore = () => {
       setValue(0);
    };
 
-   const onAfter = (e) => {
+   const onAfter = () => {
       setValue(100);
    };
    return (

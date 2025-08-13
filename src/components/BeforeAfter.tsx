@@ -15,7 +15,7 @@ function BeforeAfter({ beforeImg, afterImg, isVertical, isHoverEnabled, value, o
    const containerRef = useRef<HTMLDivElement>(null!);
    const { startDragging, calculatePosition } = useBeforeAfterInteraction({ containerRef, isVertical, onChange });
 
-   const updatePosition = (e: React.MouseEvent<HTMLDivElement>) => {
+   const updatePosition = (e: React.MouseEvent<HTMLDivElement> | MouseEvent): void => {
       calculatePosition(e);
    };
 

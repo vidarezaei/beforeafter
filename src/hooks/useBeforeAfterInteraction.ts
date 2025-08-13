@@ -1,22 +1,23 @@
 import { useState, useEffect, useCallback } from 'react';
 import calculateSliderPosition from '../helpers/calculateSliderPosition';
 
-function useBeforeAfterInteraction(props: {
+interface useBeforeAfterInteractionProps {
    containerRef: React.RefObject<HTMLDivElement>;
    isVertical: boolean;
    onChange: (value: number) => void;
-}) {
+}
+function useBeforeAfterInteraction({ containerRef, isVertical, onChange }: useBeforeAfterInteractionProps) {
    //function for handle mouse movement when user drag border or bubble
    const [draggingState, setDraggingState] = useState(false);
 
-   function calculatePosition(e: React.MouseEvent<HTMLDivElement>) {
+   function calculatePosition(e: React.MouseEvent<HTMLDivElement> | MouseEvent): void {
       if (containerRef.current) {
          const position = calculateSliderPosition(e, containerRef, isVertical);
          onChange(position);
       }
    }
 
-   function startDragging(e) {
+   function startDragging(e: React.MouseEvent<HTMLDivElement> | MouseEvent): void {
       setDraggingState(true);
       const position = calculateSliderPosition(e, containerRef, isVertical);
       onChange(position);
@@ -27,7 +28,7 @@ function useBeforeAfterInteraction(props: {
    }
 
    const handleMouseMove = useCallback(
-      (e) => {
+      (e: React.MouseEvent<HTMLDivElement> | MouseEvent): void => {
          if (draggingState) {
             const position = calculateSliderPosition(e, containerRef, isVertical);
             onChange(position);
