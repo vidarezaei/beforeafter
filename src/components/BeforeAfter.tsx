@@ -29,12 +29,7 @@ function BeforeAfter({ beforeImg, afterImg, isVertical, isHoverEnabled, value, o
          <CreateImage src={beforeImg} borderValue={value} isVertical={isVertical} isBefore={true} />
          <CreateImage src={afterImg} borderValue={value} isVertical={isVertical} isBefore={false} />
          {/*???*/}
-         <BorderHandler
-            borderValue={value}
-            startDragging={startDragging}
-            isVertical={isVertical}
-            style={{ zIndex: 1 }}
-         />
+         <BorderHandler borderValue={value} startDragging={startDragging} isVertical={isVertical} />
          {/* use startDragging for mouse down event  */}
       </SC.Container>
    );
