@@ -1,9 +1,5 @@
 import { RefObject } from 'react';
-// interface CalculateSliderPositionParams {
-//    e: MouseEvent;
-//    containerRef: RefObject<HTMLDivElement>;
-//    isVertical: boolean;
-// }
+
 function calculateSliderPosition(
    e: React.MouseEvent<HTMLDivElement> | MouseEvent,
    containerRef: RefObject<HTMLDivElement>,

@@ -11,12 +11,12 @@ const StyledImage = styled.img`
 `;
 interface CreateImageProps {
    src: string;
-   isBefore: boolean;
-   isVertical: boolean;
-   borderValue: number;
+   isBefore?: boolean;
+   isVertical?: boolean;
+   borderValue?: number;
 }
 
-function CreateImage({ src, isBefore, borderValue, isVertical }: CreateImageProps) {
+function CreateImage({ src, isBefore = false, borderValue = 100, isVertical = false }: CreateImageProps) {
    const clipPath: string = isBefore
       ? isVertical
          ? `polygon(0 0, ${borderValue}% 0, ${borderValue}% 100%, 0 100%)`

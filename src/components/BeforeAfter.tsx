@@ -6,12 +6,19 @@ import * as SC from '../styled/BeforeAfter.styled';
 interface BeforeAfterProps {
    beforeImg: string;
    afterImg: string;
-   isVertical: boolean;
-   isHoverEnabled: boolean;
+   isVertical?: boolean;
+   isHoverEnabled?: boolean;
    value: number;
    onChange: (value: number) => void;
 }
-function BeforeAfter({ beforeImg, afterImg, isVertical, isHoverEnabled, value, onChange }: BeforeAfterProps) {
+function BeforeAfter({
+   beforeImg,
+   afterImg,
+   isVertical = false,
+   isHoverEnabled = false,
+   value,
+   onChange,
+}: BeforeAfterProps) {
    const containerRef = useRef<HTMLDivElement>(null!);
    const { startDragging, calculatePosition } = useBeforeAfterInteraction({ containerRef, isVertical, onChange });
 
@@ -27,8 +34,7 @@ function BeforeAfter({ beforeImg, afterImg, isVertical, isHoverEnabled, value, o
       >
          {/*onclick: Click on the slider bar to jump to a position */}
          <CreateImage src={beforeImg} borderValue={value} isVertical={isVertical} isBefore={true} />
-         <CreateImage src={afterImg} borderValue={value} isVertical={isVertical} isBefore={false} />
-         {/*???*/}
+         <CreateImage src={afterImg} />
          <BorderHandler borderValue={value} startDragging={startDragging} isVertical={isVertical} />
          {/* use startDragging for mouse down event  */}
       </SC.Container>
