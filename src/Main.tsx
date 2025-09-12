@@ -17,7 +17,7 @@ const Main = () => {
          <BeforeAfter
             beforeImg="../assets/before.jpg"
             afterImg="../assets/after.jpg"
-            isVertical={false}
+            isVertical={true}
             isHoverEnabled={false}
             value={value}
             onChange={setValue}

@@ -29,28 +29,22 @@ function useBeforeAfterInteraction({ containerRef, isVertical, onChange }: useBe
 
    const handleMouseMove = useCallback(
       (e: React.MouseEvent<HTMLDivElement> | MouseEvent): void => {
-         if (draggingState) {
-            const position = calculateSliderPosition(e, containerRef, isVertical);
-            onChange(position);
-         }
+         if (!draggingState) return;
+         const position = calculateSliderPosition(e, containerRef, isVertical);
+         onChange(position);
       },
       [draggingState, containerRef, isVertical, onChange]
    );
 
    useEffect(() => {
-      if (draggingState) {
-         window.addEventListener('mousemove', handleMouseMove);
-         window.addEventListener('mouseup', draggingStop);
-      } else {
-         window.removeEventListener('mousemove', handleMouseMove);
-         window.removeEventListener('mouseup', draggingStop);
-      }
+      window.addEventListener('mousemove', handleMouseMove);
+      window.addEventListener('mouseup', draggingStop);
 
       return () => {
          window.removeEventListener('mousemove', handleMouseMove);
          window.removeEventListener('mouseup', draggingStop);
       };
-   }, [draggingState, containerRef, isVertical, onChange, handleMouseMove]);
+   }, [handleMouseMove]);
 
    return { startDragging, calculatePosition };
 }
